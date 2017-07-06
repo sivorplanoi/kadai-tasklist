@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    @tasks = current_user.tasks.page(params[:page]).per(10)
+    @tasks = current_user.tasks.order('created_at').page(params[:page]).per(10)
     counts(@user)
     
     if (current_user != @user) || (@user==nil)
