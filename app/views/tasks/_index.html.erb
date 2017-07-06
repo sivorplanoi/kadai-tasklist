@@ -1,0 +1,32 @@
+<% task_num = 1 %>
+<% if tasks.any? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th width="10%">No</th>
+        <th width="60%">タスク</th>
+        <th width="10%">状況</th>
+        <th width="20%"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% tasks.each do |task| %>
+        <tr>
+          <td><%= task_num %></td>
+          <td><%= task.content %></td>
+          <td><%= task.status %></td>
+          <td><%= link_to '編集', edit_task_path(task), class: "btn btn-warning" %>　<%= link_to '削除', task, method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: 'btn btn-danger' %>
+</td>          
+        </tr>
+        <% task_num += 1 %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= paginate @tasks %>
+
+<p></p>
+<%= link_to '新規タスクの作成', new_task_path, class: "btn btn-primary" %>
+
+
